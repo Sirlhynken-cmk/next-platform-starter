@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crestpoint Enquiry</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="main-container">
+    <img src="logo 2.jpg" alt="Crestpoint Logo" class="main-logo">
+    <h1 class="company-title">CRESTPOINT</h1>
+    <h2 class="company-subtitle">CLEANING, CONTRACTING SERVICES & GENERAL CONSULTATION</h2>
+    <p class="reg-no"><b>COMMERCIAL REG NO:</b> 213675</p>
+    <p class="company-desc">
+      AT CRESTPOINT, WE DELIVER TOP-TIER CLEANING AND RELIABLE CONTRACTING SOLUTIONS AND GENERAL CONSULTATION – ALL UNDER ONE ROOF. WHETHER YOU'RE MANAGING A PROPERTY, MOVING IN OR OUT, OR UPGRADING YOUR SPACE, WE’VE GOT YOU COVERED.
+    </p>
+    <div class="contact-block">
+      <b>CALL US:</b><br>
+      <span>📞 +974 52067505</span><br>
+      <span>📞 +974 31562347</span><br>
+      <span>📧 crestpoint564@gmail.com</span><br>
+      <b>Mail address:</b><br>
+      Flr 19, E18hteen Tower
+    </div>
+    <div class="slogan">Clean. Repair. Transform.</div>
+  </div>
+
+  <div class="enquiry-form-container">
+    <h2>Send Us Your Enquiry</h2>
+    <form id="enquiry-form" autocomplete="off">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" id="name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="phone">Phone:</label>
+          <input type="text" id="phone" required>
+        </div>
+        <div class="form-group">
+          <label for="service">Service:</label>
+          <select id="service" required>
+            <option value="">-- Select a Service --</option>
+            <option>DEEP CLEANING (HOMES, OFFICES, FACILITIES)</option>
+            <option>MOVE-IN/MOVE-OUT CLEANING</option>
+            <option>POST-CONSTRUCTION CLEANUP</option>
+            <option>CARPET & UPHOLSTERY CLEANING</option>
+            <option>DISINFECTION & SANITIZATION</option>
+            <option>GENERAL REPAIRS & MAINTENANCE</option>
+            <option>INTERIOR RENOVATIONS</option>
+            <option>PAINTING & FINISHING</option>
+            <option>ELECTRICAL & PLUMBING WORKS</option>
+            <option>FLOOR & CEILING INSTALLATION</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="enquiry">Your Enquiry:</label>
+        <textarea id="enquiry" rows="4" required></textarea>
+      </div>
+      <button type="submit">Submit</button>
+      <div id="form-message"></div>
+    </form>
+  </div>
+
+  <footer>
+    &copy; 2025 Crestpoint. All rights reserved.
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    emailjs.init("eK16TF8w7kle_p0nv");
+
+    document.getElementById('enquiry-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const userData = {
+        name: document.getElementById('name').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        phone: document.getElementById('phone').value.trim(),
+        service: document.getElementById('service').value,
+        enquiry: document.getElementById('enquiry').value.trim()
+      };
+      const formMessage = document.getElementById('form-message');
+      formMessage.textContent = "Submitting your enquiry...";
+
+      emailjs.send("service_6mghz4v", "template_l8cphqd", userData)
+        .then(function(response) {
+          formMessage.textContent = "Your enquiry was sent successfully via email!";
+          formMessage.style.color = "#001f3f";
+          document.getElementById('enquiry-form').reset();
+        }, function(error) {
+          formMessage.textContent = "Oops! Something went wrong while sending your enquiry.";
+          formMessage.style.color = "red";
+          console.log(error);
+        });
+    });
+  </script>
+</body>
+</html>
